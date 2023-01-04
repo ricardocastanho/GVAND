@@ -1,0 +1,100 @@
+type Genre {
+   _id: Long!
+   name: String!
+   movies: [Movie] @relation(name: "IN_GENRE", direction: IN)
+}
+
+type User {
+   _id: Long!
+   name: String!
+   userId: String!
+   rated: [Movie] @relation(name: "RATED", direction: OUT)
+   RATED_rel: [RATED]
+}
+
+type Director_Person {
+   _id: Long!
+   bio: String
+   born: Date
+   bornIn: String
+   died: Date
+   imdbId: String
+   name: String!
+   poster: String
+   tmdbId: String!
+   url: String!
+   acted_in: [Movie] @relation(name: "ACTED_IN", direction: OUT)
+   directed: [Movie] @relation(name: "DIRECTED", direction: OUT)
+   DIRECTED_rel: [DIRECTED]
+}
+
+type Actor_Person {
+   _id: Long!
+   bio: String
+   born: Date
+   bornIn: String
+   died: Date
+   imdbId: String
+   name: String!
+   poster: String
+   tmdbId: String!
+   url: String!
+   acted_in: [Movie] @relation(name: "ACTED_IN", direction: OUT)
+   directed: [Movie] @relation(name: "DIRECTED", direction: OUT)
+   DIRECTED_rel: [DIRECTED]
+}
+
+type Actor_Director_Person {
+   _id: Long!
+   bio: String
+   born: Date
+   bornIn: String
+   died: Date
+   imdbId: String
+   name: String!
+   poster: String
+   tmdbId: String!
+   url: String!
+   acted_in: [Movie] @relation(name: "ACTED_IN", direction: OUT)
+   directed: [Movie] @relation(name: "DIRECTED", direction: OUT)
+   DIRECTED_rel: [DIRECTED]
+}
+
+type Movie {
+   _id: Long!
+   budget: Int
+   countries: [String]
+   imdbId: String!
+   imdbRating: Float
+   imdbVotes: Int
+   languages: [String]
+   movieId: String!
+   plot: String
+   poster: String
+   released: String
+   revenue: Int
+   runtime: Int
+   title: String!
+   tmdbId: String
+   url: String
+   year: Int
+   in_genre: [Genre] @relation(name: "IN_GENRE", direction: OUT)
+   users_rated: [User] @relation(name: "RATED", direction: IN)
+}
+
+
+type RATED @relation(name: "RATED") {
+   from: User!
+   to: Movie!
+   rating: Float!
+   timestamp: Int!
+}
+
+
+type DIRECTED @relation(name: "DIRECTED") {
+   from: Actor_Director_Person!
+   to: Movie!
+   role: String
+}
+
+
