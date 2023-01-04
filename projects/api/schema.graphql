@@ -80,6 +80,15 @@ type Movie {
    year: Int
    in_genre: [Genre] @relation(name: "IN_GENRE", direction: OUT)
    users_rated: [User] @relation(name: "RATED", direction: IN)
+   similar: [Movie]
+      @cypher(
+         statement: """
+            MATCH (this)-[:IN_GENRE]->(g:Genre)<-[:IN_GENRE]-(rec:Movie)
+            WITH rec, collect(g.name) AS genres, count(*) AS commonGenres
+            RETURN rec
+            ORDER BY commonGenres DESC LIMIT 10;
+         """
+      )
 }
 
 
@@ -96,5 +105,3 @@ type DIRECTED @relation(name: "DIRECTED") {
    to: Movie!
    role: String
 }
-
-
