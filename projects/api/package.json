@@ -5,6 +5,9 @@
   "repository": "https://github.com/ricardocastanho/GVAND",
   "author": "Ricardo Castanho <48383095+ricardocastanho@users.noreply.github.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "npx nodemon --ext js,graphql ./projects/api/index.js"
+  },
   "dependencies": {
     "apollo-server": "^3.11.1",
     "dotenv": "^16.0.3",
