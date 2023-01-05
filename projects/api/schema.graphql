@@ -120,3 +120,13 @@ type DIRECTED @relation(name: "DIRECTED") {
    to: Movie!
    role: String
 }
+
+type Query {
+   MovieSearch(search: String): [Movie]
+      @cypher(
+         statement: """
+            CALL db.index.fulltext.queryNodes('movieSearchIndex', $search+'~')
+            YIELD node RETURN node;
+         """
+      )
+}
