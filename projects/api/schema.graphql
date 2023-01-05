@@ -10,6 +10,20 @@ type User {
    userId: String!
    rated: [Movie] @relation(name: "RATED", direction: OUT)
    RATED_rel: [RATED]
+   recommendedMovies(limit: Int = 5): [Movie]
+      @cypher(
+         statement: """
+            MATCH (this)-[r1:RATED]->(:Movie)<-[r2:RATED]-(peer:User)
+            WHERE abs(r1.rating - r2.rating) < 1
+            WITH this, peer
+            MATCH (peer)-[r3:RATED]->(rec:Movie)
+            WHERE r3.rating > 4 AND NOT EXISTS{ (this)-[:RATED]->(rec) }
+            WITH rec, count(*) as freq, avg(r3.rating) as rating
+            RETURN rec
+            ORDER BY rating DESC, freq DESC
+            LIMIT apoc.convert.toInteger($limit);
+         """
+      ) 
 }
 
 type Director_Person {
