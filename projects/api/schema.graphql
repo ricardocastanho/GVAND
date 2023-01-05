@@ -25,7 +25,7 @@ type User {
       ) 
 }
 
-type Director_Person {
+type Person {
    _id: Long!
    bio: String
    born: Date
@@ -41,7 +41,7 @@ type Director_Person {
    DIRECTED_rel: [DIRECTED]
 }
 
-type Actor_Person {
+type Actor {
    _id: Long!
    bio: String
    born: Date
@@ -57,7 +57,7 @@ type Actor_Person {
    DIRECTED_rel: [DIRECTED]
 }
 
-type Actor_Director_Person {
+type Director {
    _id: Long!
    bio: String
    born: Date
@@ -104,7 +104,6 @@ type Movie {
       )
 }
 
-
 type RATED @relation(name: "RATED") {
    from: User!
    to: Movie!
@@ -112,9 +111,20 @@ type RATED @relation(name: "RATED") {
    timestamp: Int!
 }
 
+type ACTED_IN @relation(name: "ACTED_IN") {
+   from: Actor!
+   to: Movie!
+   role: String!
+}
+
+type IN_GENRE @relation(name: "IN_GENRE") {
+   from: Movie!
+   to: Genre!
+   role: String!
+}
 
 type DIRECTED @relation(name: "DIRECTED") {
-   from: Actor_Director_Person!
+   from: Director!
    to: Movie!
    role: String
 }
