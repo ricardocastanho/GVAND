@@ -86,7 +86,8 @@ type Movie {
             MATCH (this)-[:IN_GENRE]->(g:Genre)<-[:IN_GENRE]-(rec:Movie)
             WITH rec, collect(g.name) AS genres, count(*) AS commonGenres
             RETURN rec
-            ORDER BY commonGenres DESC LIMIT $limit;
+            ORDER BY commonGenres DESC
+            LIMIT apoc.convert.toInteger($limit);
          """
       )
 }
