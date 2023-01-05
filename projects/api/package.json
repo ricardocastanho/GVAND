@@ -1,5 +1,5 @@
 {
-  "name": "GVAND",
+  "name": "gvand-api",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/ricardocastanho/GVAND",
