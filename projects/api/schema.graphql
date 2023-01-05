@@ -10,7 +10,7 @@ type User {
    userId: String!
    rated: [Movie] @relation(name: "RATED", direction: OUT)
    RATED_rel: [RATED]
-   recommendedMovies(limit: Int = 5): [Movie]
+   recommendedMovies: [Movie]
       @cypher(
          statement: """
             MATCH (this)-[r1:RATED]->(:Movie)<-[r2:RATED]-(peer:User)
@@ -20,8 +20,7 @@ type User {
             WHERE r3.rating > 4 AND NOT EXISTS{ (this)-[:RATED]->(rec) }
             WITH rec, count(*) as freq, avg(r3.rating) as rating
             RETURN rec
-            ORDER BY rating DESC, freq DESC
-            LIMIT apoc.convert.toInteger($limit);
+            ORDER BY rating DESC, freq DESC;
          """
       ) 
 }
@@ -94,14 +93,13 @@ type Movie {
    year: Int
    in_genre: [Genre] @relation(name: "IN_GENRE", direction: OUT)
    users_rated: [User] @relation(name: "RATED", direction: IN)
-   similar(limit: Int = 5): [Movie]
+   similar: [Movie]
       @cypher(
          statement: """
             MATCH (this)-[:IN_GENRE]->(g:Genre)<-[:IN_GENRE]-(rec:Movie)
             WITH rec, collect(g.name) AS genres, count(*) AS commonGenres
             RETURN rec
-            ORDER BY commonGenres DESC
-            LIMIT apoc.convert.toInteger($limit);
+            ORDER BY commonGenres DESC;
          """
       )
 }
