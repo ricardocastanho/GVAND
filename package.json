@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "unplugin-vue-components": "^0.22.12"
+  }
+}

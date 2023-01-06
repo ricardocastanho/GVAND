@@ -1,7 +1,14 @@
 <template>
-  <h1>
-    GVAND
-  </h1>
+  <v-btn
+    fab
+    bottom
+    right
+    color="pink"
+  >
+    <v-icon>
+      mdi-heart
+    </v-icon>
+  </v-btn>
 </template>
 
 <script>
