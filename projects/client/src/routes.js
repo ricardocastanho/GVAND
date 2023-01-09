@@ -1,10 +1,18 @@
 export default [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Login",
     meta: {
-      layout: 'BaseLayout',
+      layout: "BlankLayout",
     },
-    component: () => import('./views/Index.vue'),
-  }
-]
+    component: () => import("./views/Login.vue"),
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    meta: {
+      layout: "BaseLayout",
+    },
+    component: () => import("./views/Dashboard.vue"),
+  },
+];
