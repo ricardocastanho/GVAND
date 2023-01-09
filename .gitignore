@@ -1,4 +1,7 @@
 projects/**/node_modules
 projects/**/dist
+node_modules
+package.json
+yarn.lock
 
 .env
