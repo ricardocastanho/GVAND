@@ -10,12 +10,13 @@
   "dependencies": {
     "@mdi/font": "^7.1.96",
     "vue": "^2.7.0",
+    "vue-router": "^3",
     "vuetify": "^2.6.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue2": "^2.2.0",
     "sass": "~1.32.12",
-    "vite": "^4.0.4",
-    "unplugin-vue-components": "^0.22.12"
+    "unplugin-vue-components": "^0.22.12",
+    "vite": "^4.0.4"
   }
 }

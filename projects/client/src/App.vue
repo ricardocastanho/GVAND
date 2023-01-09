@@ -1,14 +1,9 @@
 <template>
-  <v-btn
-    fab
-    bottom
-    right
-    color="pink"
-  >
-    <v-icon>
-      mdi-heart
-    </v-icon>
-  </v-btn>
+  <v-main>
+    <v-fade-transition mode="out-in">
+      <router-view />
+    </v-fade-transition>
+  </v-main>
 </template>
 
 <script>
