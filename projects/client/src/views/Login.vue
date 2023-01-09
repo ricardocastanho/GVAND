@@ -2,10 +2,10 @@
   <v-container fill-height fluid>
     <v-row justify="center">
       <v-col
-      cols="12"
-      sm="10"
-      md="4"
-      lg="4"
+        cols="12"
+        sm="10"
+        md="6"
+        lg="4"
       >
         <v-card ref="form">
           <v-card-title class="text-h4">
