@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import TheSidebar from '../components/TheSidebar.vue';
+import TheSidebar from '@/components/TheSidebar.vue';
 
 export default {
   name: 'BaseLayout',
