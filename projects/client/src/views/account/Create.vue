@@ -9,7 +9,7 @@
       >
         <v-card ref="form">
           <v-card-title class="text-h4">
-            Entrar
+            Criar conta
           </v-card-title>
 
           <v-card-text class="mt-10">
@@ -21,7 +21,8 @@
               placeholder="John Doe"
               prepend-icon="mdi-account"
               required
-              ></v-text-field>
+            ></v-text-field>
+
             <v-text-field
               ref="password"
               v-model="form.password"
@@ -34,13 +35,22 @@
               @click:append="showPassword = !showPassword"
               required
             ></v-text-field>
-          </v-card-text>
-
-          <v-card-text>
-            Ainda não possui uma conta?
-            <span class="text-decoration-underline" @click="createAccount" style="cursor: pointer;">
-              Clique aqui para criar!
-            </span>
+            
+            <v-text-field
+              ref="password2"
+              v-model="form.password2"
+              :rules="[
+                () => !!form.password2 || 'O campo é obrigatório',
+                () => form.password === form.password2 || 'As senhas não batem'
+              ]"
+              label="Confirme sua senha"
+              placeholder="**********"
+              prepend-icon="mdi-lock"
+              :append-icon="showPassword2 ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showPassword2 ? 'text' : 'password'"
+              @click:append="showPassword2 = !showPassword2"
+              required
+            ></v-text-field>
           </v-card-text>
 
           <v-divider class="mt-6"></v-divider>
@@ -50,9 +60,10 @@
             <v-btn
               color="primary"
               text
-              @click="submit"
+              :loading="isLoading"
+              @click="createAccount"
             >
-              Entrar
+              Criar
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -62,6 +73,8 @@
 </template>
 
 <script>
+import { CreateUser } from '@/GraphQL/User.js'
+
 export default {
   name: 'LoginPage',
   data () {
@@ -69,23 +82,39 @@ export default {
       form: {
         name: '',
         password: '',
+        password2: '',
       },
       showPassword: false,
+      showPassword2: false,
+      isLoading: false,
     }
   },
   methods: {
-    submit () {
-      if (!this.$refs.name.valid || !this.$refs.password.valid) {
+    async createAccount() {
+      if (!this.$refs.name.valid || !this.$refs.password.valid || !this.$refs.password2.valid) {
         this.$refs.name.validate();
         this.$refs.password.validate();
+        this.$refs.password2.validate();
         return
       }
+      
+      try {
+        this.isLoading = true
 
-      this.$router.push({ name: 'Dashboard' });
+        await this.$apollo.mutate({
+          mutation: CreateUser,
+          variables: {
+            name: this.form.name,
+            userId: self.crypto.randomUUID(),
+          }
+        })
+      } catch (e) {
+        console.error(e)
+      } finally {
+        this.isLoading = false
+        this.$router.push({ name: 'Dashboard' })
+      }
     },
-    createAccount() {
-      this.$router.push({ name: 'CreateAccount' });
-    }
   }
 }
 </script>
