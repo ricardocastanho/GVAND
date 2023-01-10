@@ -11,7 +11,7 @@
         </v-list-item-avatar>
       </v-list-item>
 
-      <v-list-item link>
+      <v-list-item link @click="updateAccount">
         <v-list-item-content>
           <v-list-item-title class="text-h6">
             Ricardo Castanho
@@ -48,5 +48,10 @@
 <script>
 export default {
   name: 'TheSidebar',
+  methods: {
+    updateAccount() {
+      this.$router.push({ name: 'UpdateAccount' });
+    },
+  },
 }
 </script>
