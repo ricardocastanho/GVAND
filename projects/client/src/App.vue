@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     layout () {
-      return this.$route.meta.layout || 'BaseLayout'
+      return this.$route.meta.layout || 'BlankLayout'
     }
   },
 }
