@@ -4,6 +4,16 @@ export const CreateUser = gql`
   mutation CreateUser($name: String!, $userId: String!) {
     CreateUser(name: $name, userId: $userId) {
       name
+      userId
+    }
+  }
+`;
+
+export const UpdateUser = gql`
+  mutation UpdateUser($userId: String!, $name: String) {
+    user: UpdateUser(userId: $userId, name: $name) {
+      name
+      userId
     }
   }
 `;

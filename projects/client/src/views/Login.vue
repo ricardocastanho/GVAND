@@ -100,7 +100,7 @@ export default {
         }
 
         const userStore = useUserStore();
-        userStore.signUserIn(user);
+        userStore.setUserLoggedIn(user);
 
         this.$router.push({ name: 'Dashboard' });
       } catch (e) {

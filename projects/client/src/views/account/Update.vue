@@ -27,7 +27,7 @@
           ref="password"
           v-model="form.password"
           :rules="[() => !!form.password || 'O campo é obrigatório']"
-          label="Sua senha"
+          label="Sua nova senha"
           placeholder="**********"
           prepend-icon="mdi-lock"
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -43,7 +43,7 @@
             () => !!form.password2 || 'O campo é obrigatório',
             () => form.password === form.password2 || 'As senhas não batem'
           ]"
-          label="Confirme sua senha"
+          label="Confirme sua nova senha"
           placeholder="**********"
           prepend-icon="mdi-lock"
           :append-icon="showPassword2 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -59,7 +59,6 @@
         <v-spacer></v-spacer>
         <v-btn
           text
-          :loading="isLoading"
           class="mx-2"
           @click="back"
         >
@@ -69,7 +68,7 @@
           color="primary"
           text
           :loading="isLoading"
-          @click="createAccount"
+          @click="updateAccount"
         >
           Atualizar
         </v-btn>
@@ -82,7 +81,7 @@
 import { mapState } from 'pinia'
 
 import { useUserStore } from '@/stores'
-// import { CreateUser } from '@/GraphQL/User.js'
+import { UpdateUser } from '@/GraphQL/User.js'
 
 export default {
   name: 'LoginPage',
@@ -108,24 +107,25 @@ export default {
     back() {
       this.$router.go(-1);
     },
-    async createAccount() {
-      if (!this.$refs.name.valid || !this.$refs.password.valid || !this.$refs.password2.valid) {
+    async updateAccount() {
+      if (!this.$refs.name.valid) {
         this.$refs.name.validate();
-        this.$refs.password.validate();
-        this.$refs.password2.validate();
         return
       }
       
       try {
         this.isLoading = true
 
-        // await this.$apollo.mutate({
-        //   mutation: CreateUser,
-        //   variables: {
-        //     name: this.form.name,
-        //     userId: self.crypto.randomUUID(),
-        //   }
-        // })
+        const { data } = await this.$apollo.mutate({
+          mutation: UpdateUser,
+          variables: {
+            name: this.form.name,
+            userId: this.userLoggedIn.userId,
+          }
+        })
+
+        const userStore = useUserStore();
+        userStore.setUserLoggedIn(data.user);
       } catch (e) {
         console.error(e)
       } finally {
