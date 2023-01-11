@@ -74,6 +74,7 @@
 
 <script>
 import { CreateUser } from '@/GraphQL/User.js'
+import { useUserStore } from '@/stores'
 
 export default {
   name: 'LoginPage',
@@ -101,13 +102,16 @@ export default {
       try {
         this.isLoading = true
 
-        await this.$apollo.mutate({
+        const { data } = await this.$apollo.mutate({
           mutation: CreateUser,
           variables: {
             name: this.form.name,
             userId: self.crypto.randomUUID(),
           }
         })
+
+        const userStore = useUserStore();
+        userStore.setUserLoggedIn(data.user);
       } catch (e) {
         console.error(e)
       } finally {
