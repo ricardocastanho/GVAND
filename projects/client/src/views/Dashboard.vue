@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { greetUser } from '@/support'
+import { greetUser } from '@/helpers'
 
 export default {
   name: 'DashboardPage',
