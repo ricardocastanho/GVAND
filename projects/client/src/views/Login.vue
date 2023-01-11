@@ -63,6 +63,7 @@
 
 <script>
 import { useUserStore } from '@/stores'
+import { SignUserIn } from '@/GraphQL/User'
 
 export default {
   name: 'LoginPage',
@@ -76,17 +77,35 @@ export default {
     }
   },
   methods: {
-    signIn() {
+    async signIn() {
       if (!this.$refs.name.valid || !this.$refs.password.valid) {
         this.$refs.name.validate();
         this.$refs.password.validate();
         return
       }
 
-      const userStore = useUserStore();
-      userStore.signUserIn({ name: this.form.name });
+      try {
+        const { data } = await this.$apollo.query({
+          query: SignUserIn,
+          variables: {
+            name: this.form.name,
+          }
+        })
 
-      this.$router.push({ name: 'Dashboard' });
+        const [user] = data.user;
+
+        if (!user) {
+          console.warn('User not find');
+          return
+        }
+
+        const userStore = useUserStore();
+        userStore.signUserIn(user);
+
+        this.$router.push({ name: 'Dashboard' });
+      } catch (e) {
+        console.error(e);
+      }
     },
     createAccount() {
       this.$router.push({ name: 'CreateAccount' });
