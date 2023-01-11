@@ -18,6 +18,15 @@ export const UpdateUser = gql`
   }
 `;
 
+
+export const DeleteUser = gql`
+  mutation DeleteUser($userId: String!) {
+    user: DeleteUser(userId: $userId) {
+      name
+    }
+  }
+`;
+
 export const SignUserIn = gql`
   query User($name: String) {
     user: User(first: 1, name: $name) {

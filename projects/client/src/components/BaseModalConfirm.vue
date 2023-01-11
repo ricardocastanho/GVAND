@@ -69,8 +69,5 @@ export default {
       dialog.onClickOutside();
     }
   },
-  mounted() {
-    console.log({refs: this.$refs.baseModal})
-  }
 }
 </script>

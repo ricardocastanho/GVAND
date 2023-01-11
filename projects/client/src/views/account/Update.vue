@@ -53,6 +53,30 @@
         ></v-text-field>
       </v-card-text>
 
+      <div class="mt-6 px-3">
+        <v-alert outlined type="error" class="align-center">
+          <v-row align="center">
+            <v-col class="grow">
+              <strong>Deletar</strong> sua conta <strong>permanentemente</strong>
+            </v-col>
+
+            <v-col class="shrink" style="padding: 0px !important">
+              <BaseModalConfirm 
+                button-text="Deletar"
+                title="Excluir conta"
+                question="Tem certeza que você deseja excluir a sua conta permanentemente?"
+                confirmButtonText="Deletar"
+                cancelButtonText="Cancelar"
+                text
+                dense
+                color="error"
+                @confirm="deleteAccount"
+              />
+            </v-col>
+          </v-row>
+        </v-alert>
+      </div>
+
       <v-divider class="mt-6"></v-divider>
       
       <v-card-actions>
@@ -80,11 +104,15 @@
 <script>
 import { mapState } from 'pinia'
 
+import BaseModalConfirm from '@/components/BaseModalConfirm.vue'
 import { useUserStore } from '@/stores'
-import { UpdateUser } from '@/GraphQL/User.js'
+import { UpdateUser, DeleteUser } from '@/GraphQL/User.js'
 
 export default {
   name: 'LoginPage',
+  components: {
+    BaseModalConfirm,
+  },
   data () {
     return {
       form: {
@@ -95,6 +123,7 @@ export default {
       showPassword: false,
       showPassword2: false,
       isLoading: false,
+      confirmDeleteDialog: false,
     }
   },
   computed: {
@@ -126,6 +155,27 @@ export default {
 
         const userStore = useUserStore();
         userStore.setUserLoggedIn(data.user);
+      } catch (e) {
+        console.error(e)
+      } finally {
+        this.isLoading = false
+      }
+    },
+    async deleteAccount() {
+      try {
+        this.isLoading = true
+
+        await this.$apollo.mutate({
+          mutation: DeleteUser,
+          variables: {
+            userId: this.userLoggedIn.userId,
+          }
+        })
+
+        const userStore = useUserStore();
+        userStore.setUserLoggedIn(null);
+        
+        this.$router.push({ name: 'Login' })
       } catch (e) {
         console.error(e)
       } finally {
