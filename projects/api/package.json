@@ -6,7 +6,7 @@
   "author": "Ricardo Castanho <48383095+ricardocastanho@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "npx nodemon --ext js,graphql ./projects/api/index.js"
+    "dev": "npx nodemon --ext js,graphql ./index.js"
   },
   "dependencies": {
     "apollo-server": "^3.11.1",
