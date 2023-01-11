@@ -5,6 +5,7 @@ import Components from "unplugin-vue-components/vite";
 import { VuetifyResolver } from "unplugin-vue-components/resolvers";
 
 export default defineConfig({
+  envDir: '../../',
   plugins: [
     vue(),
     Components({

@@ -7,7 +7,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 Vue.use(VueApollo);
 
 const httpLink = createHttpLink({
-  uri: "https://ricardocastanho-ubiquitous-space-spork-g7p7qjvwpr4hvrvv-3003.preview.app.github.dev/",
+  uri: import.meta.env.VITE_API_URL || 'http://localhost:3003',
 });
 
 const cache = new InMemoryCache();
