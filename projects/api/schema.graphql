@@ -7,7 +7,7 @@ type Genre {
 type User {
    _id: Long!
    name: String!
-   userId: String!
+   userId: String! @id
    rated: [Movie] @relation(name: "RATED", direction: OUT)
    RATED_rel: [RATED]
    recommendedMovies: [Movie]
