@@ -79,6 +79,9 @@
 </template>
 
 <script>
+import { mapState } from 'pinia'
+
+import { useUserStore } from '@/stores'
 // import { CreateUser } from '@/GraphQL/User.js'
 
 export default {
@@ -94,6 +97,12 @@ export default {
       showPassword2: false,
       isLoading: false,
     }
+  },
+  computed: {
+    ...mapState(useUserStore, ['userLoggedIn']),
+  },
+  mounted() {
+    this.form.name = this.userLoggedIn.name;
   },
   methods: {
     back() {

@@ -14,7 +14,7 @@
       <v-list-item link @click="updateAccount">
         <v-list-item-content>
           <v-list-item-title class="text-h6">
-            Ricardo Castanho
+            {{ userLoggedIn.name }}
           </v-list-item-title>
           <v-list-item-subtitle>
             Editar seu perfil
@@ -46,8 +46,15 @@
 </template>
 
 <script>
+import { mapState } from 'pinia'
+
+import { useUserStore } from '@/stores'
+
 export default {
   name: 'TheSidebar',
+  computed: {
+    ...mapState(useUserStore, ['userLoggedIn']),
+  },
   methods: {
     updateAccount() {
       this.$router.push({ name: 'UpdateAccount' });

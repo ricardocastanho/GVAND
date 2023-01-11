@@ -15,6 +15,7 @@
     "apollo-link-http": "^1.5.17",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
+    "pinia": "^2.0.28",
     "vue": "^2.7.0",
     "vue-apollo": "^3.1.0",
     "vue-router": "^3",

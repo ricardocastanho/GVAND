@@ -50,7 +50,7 @@
             <v-btn
               color="primary"
               text
-              @click="submit"
+              @click="signIn"
             >
               Entrar
             </v-btn>
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import { useUserStore } from '@/stores'
+
 export default {
   name: 'LoginPage',
   data () {
@@ -74,12 +76,15 @@ export default {
     }
   },
   methods: {
-    submit () {
+    signIn() {
       if (!this.$refs.name.valid || !this.$refs.password.valid) {
         this.$refs.name.validate();
         this.$refs.password.validate();
         return
       }
+
+      const userStore = useUserStore();
+      userStore.signUserIn({ name: this.form.name });
 
       this.$router.push({ name: 'Dashboard' });
     },

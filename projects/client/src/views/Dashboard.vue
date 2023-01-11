@@ -5,13 +5,17 @@
 </template>
 
 <script>
+import { mapState } from 'pinia'
+
 import { greetUser } from '@/helpers'
+import { useUserStore } from '@/stores'
 
 export default {
   name: 'DashboardPage',
   computed: {
+    ...mapState(useUserStore, ['userLoggedIn']),
     greet() {
-      return greetUser('Ricardo')
+      return greetUser(this.userLoggedIn.name)
     }
   }
 }
