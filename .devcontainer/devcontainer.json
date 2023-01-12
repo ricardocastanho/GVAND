@@ -1,6 +1,8 @@
 {
 	"name": "Node.js",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
 	"portsAttributes": {
 		"3003": {
 			"label": "api"
@@ -12,13 +14,5 @@
 	"postCreateCommand": {
     "api": "cd projects/api && yarn install",
     "client": "cd projects/client && yarn install"
-  },
-	"postStartCommand": {
-    "api": ["cd", "projects/api", "&&", "yarn", "dev"],
-		"client": ["cd", "projects/client", "&&", "yarn", "dev"]
-  },
-	"postAttachCommand": {
-    "api": ["cd", "projects/api", "&&", "yarn", "dev"],
-		"client": ["cd", "projects/client", "&&", "yarn", "dev"]
   }
 }
