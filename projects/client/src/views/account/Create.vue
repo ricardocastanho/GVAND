@@ -116,7 +116,7 @@ export default {
         console.error(e)
       } finally {
         this.isLoading = false
-        this.$router.push({ name: 'Dashboard' })
+        this.$router.push({ name: 'Home' })
       }
     },
   }

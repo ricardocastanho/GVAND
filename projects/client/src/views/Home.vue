@@ -11,7 +11,7 @@ import { greetUser } from '@/helpers'
 import { useUserStore } from '@/stores'
 
 export default {
-  name: 'DashboardPage',
+  name: 'HomePage',
   computed: {
     ...mapState(useUserStore, ['userLoggedIn']),
     greet() {

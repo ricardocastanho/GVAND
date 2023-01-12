@@ -18,11 +18,11 @@ export default [
     component: () => import("./views/account/Update.vue"),
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
+    path: "/home",
+    name: "Home",
     meta: {
       layout: "BaseLayout",
     },
-    component: () => import("./views/Dashboard.vue"),
+    component: () => import("./views/Home.vue"),
   },
 ];
