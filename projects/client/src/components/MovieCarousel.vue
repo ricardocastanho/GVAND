@@ -1,7 +1,7 @@
 <template>
   <v-carousel
     cycle
-    height="600"
+    height="700"
     dark
     hide-delimiter-background
     show-arrows-on-hover

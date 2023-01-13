@@ -1,8 +1,6 @@
 <template>
   <v-container fluid style="padding: 0px !important">
     <MovieCarousel />
-
-    <div class="text-h4">{{ greet }}</div>
   </v-container>
 </template>
 
