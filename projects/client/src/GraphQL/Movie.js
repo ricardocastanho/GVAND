@@ -1,9 +1,11 @@
 import gql from "graphql-tag";
 
 export const GetMovies = gql`
-  query GetMovies {
-    movies: Movie(first: 25) {
+  query Movie($first: Int, $orderBy: [_MovieOrdering]) {
+    movies: Movie(first: $first, orderBy: $orderBy) {
       title
+      plot
+      poster
     }
   }
 `;

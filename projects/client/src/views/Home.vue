@@ -1,5 +1,7 @@
 <template>
-  <v-container>
+  <v-container fluid style="padding: 0px !important">
+    <MovieCarousel />
+
     <div class="text-h4">{{ greet }}</div>
   </v-container>
 </template>
@@ -10,8 +12,13 @@ import { mapState } from 'pinia'
 import { greetUser } from '@/helpers'
 import { useUserStore } from '@/stores'
 
+import MovieCarousel from '@/components/MovieCarousel.vue'
+
 export default {
   name: 'HomePage',
+  components: {
+    MovieCarousel
+  },
   computed: {
     ...mapState(useUserStore, ['userLoggedIn']),
     greet() {

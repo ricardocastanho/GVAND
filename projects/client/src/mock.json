@@ -1,0 +1,29 @@
+{
+  "movies": [
+    {
+      "title": "Toy Story",
+      "plot": "O aniversário do garoto Andy está chegando e seus brinquedos ficam nervosos, temendo que ele ganhe novos brinquedos que possam substituí-los. Liderados pelo caubói Woody, o brinquedo predileto de Andy, eles recebem Buzz Lightyear, o boneco de um patrulheiro espacial, que logo passa a receber mais atenção do garoto. Com ciúmes, Woody tenta ensiná-lo uma lição, mas Buzz cai pela janela. É o início da aventura do caubói, que precisa resgatar Buzz para limpar sua barra com os outros brinquedos.",
+      "banner": "https://www.themoviedb.org/t/p/original/e6bG3pp3cpImIDObC62bxmsarto.jpg"
+    },
+    {
+      "title": "Turbo",
+      "plot": "Theo (Ryan Reynolds) é um caracol de jardim, que passa o dia com outros caracóis, colhendo tomates e torcendo para não ser capturado por aves predadoras. Apesar da vida pacata, este jovem animal sonha em se tornar extremamente veloz, como o seu ídolo, o corredor campeão de Indianápolis Guy Gagné (Bill Hader). A obsessão pela velocidade faz que com Theo seja ridicularizado pelos colegas. Um dia, no entanto, ele cai acidentalmente dentro do motor de um grande carro de corrida, e um efeito inesperado acontece em seu corpo, fazendo com que ele se torne extremamente veloz. Rebatizado Turbo, o caracol encontra abrigo na casa de Tito (Michael Peña), um vendedor de comida mexicana conhecido pelos planos inusitados e que quase sempre dão errado. Surpreso com a velocidade de Turbo, Tito decide levá-lo à corrida de Indianápolis, para competir com Guy Gagné.",
+      "banner": "https://www.themoviedb.org/t/p/original/koZFb57ea75rZzqp4fiYi10uOgh.jpg"
+    },
+    {
+      "title": "Tá chovendo hambúrguer",
+      "plot": "Flint Lockwood é um jovem cientista que sonha criar algo que faça com que seja reconhecido pela população de Boca Grande, uma pequena ilha no Atlântico. Um dia ele consegue descobrir uma forma de transformar água em comida, só que precisa de bastante eletricidade para colocá-la em funcionamento. Ao tentar usar a energia da geradora local, ele perde o controle da invenção e ela ruma para o céu. Para piorar, a confusão que ele cria destroi um parque de diversões, o grande trunfo do prefeito Shelbourne para melhorar a economia local. Flint acredita ter perdido a máquina, mas repentinamente começa a chover hambúrgueres em toda a cidade. Com o apoio de Sam Sparks, uma estagiária de jornalismo que foi enviada à ilha para ser a nova \"garota do tempo\", Flint logo vira uma celebridade local.",
+      "banner": "https://www.themoviedb.org/t/p/original/iIvtWOkRgzprh6PRPEdnEcwGyM0.jpg"
+    },
+    {
+      "title": "Kung Fu Panda 2",
+      "plot": "Po (Jack Black) vive o sonho de ser o dragão guerreiro, protegendo o Vale da Paz ao lado dos mestres Shifu (Dustin Hoffman), Tigresa (Angelina Jolie), Macaco (Jackie Chan), Víbora (Lucy Liu), Louva-deus (Seth Rogen) e Garça (David Cross). Sua vida pacata chega ao fim quando surge um novo inimigo, o lorde Chen (Gary Oldman), que possui uma arma secreta capaz de permitir a conquista da China e provocar o fim do kung fu. Para impedi-lo, Po e os Cinco Furiosos precisam cruzar o país e derrotá-lo.",
+      "banner": "https://www.themoviedb.org/t/p/original/7BdxZXbSkUiVeCRXKD3hi9KYeWm.jpg"
+    },
+    {
+      "title": "Carros",
+      "plot": "Ao viajar para a Califórnia, o famoso carro de corridas Relâmpago McQueen se perde e vai parar em Radiator Springs, uma cidadezinha na Rota 66. Ele conhece novos amigos e aprende lições que mudam sua forma de encarar a vida.",
+      "banner": "https://www.themoviedb.org/t/p/original/wZiUsAI939lOKgs0u3qA3zSW7zx.jpg"
+    }
+  ]
+}
