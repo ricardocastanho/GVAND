@@ -1,22 +1,22 @@
 <template>
   <v-app>
-    <TheSidebar />
-
-    <v-main class="py-6">
+    <v-main>
       <v-fade-transition mode="out-in">
         <slot />
       </v-fade-transition>
     </v-main>
+    
+    <TheBottomNavigation />
   </v-app>
 </template>
 
 <script>
-import TheSidebar from '@/components/TheSidebar.vue';
+import TheBottomNavigation from '@/components/TheBottomNavigation.vue';
 
 export default {
   name: 'BaseLayout',
   components: {
-    TheSidebar,
+    TheBottomNavigation,
   },
 }
 </script>
