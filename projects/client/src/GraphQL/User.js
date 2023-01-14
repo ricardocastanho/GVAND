@@ -32,6 +32,10 @@ export const SignUserIn = gql`
     user: User(first: 1, name: $name) {
       name
       userId
+      recommendedMovies(first: 25) {
+        title
+        poster
+      }
     }
   }
 `;
