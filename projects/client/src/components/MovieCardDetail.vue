@@ -7,7 +7,6 @@
           width="250"
           :src="movie.poster"
           class="ma-4 card-image"
-          @click="() => openMovieDetails(movie)"
         />
       </v-col>
       <v-col md="7">

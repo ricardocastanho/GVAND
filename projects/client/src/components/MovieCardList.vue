@@ -41,7 +41,7 @@ export default {
 
 <style scoped>
 .card-image {
-  filter: brightness(50%);
+  filter: brightness(80%);
 }
 
 .card-image:hover {
