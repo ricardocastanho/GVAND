@@ -40,17 +40,17 @@ export default {
 </script>
 
 <style scoped>
-.brightness {
+.card-image {
   filter: brightness(50%);
+}
+
+.card-image:hover {
+  cursor: pointer;
 }
 
 .card-title {
   position: absolute;
   bottom: 0px;
   left: 0px;
-}
-
-.card-image:hover {
-  cursor: pointer;
 }
 </style>
