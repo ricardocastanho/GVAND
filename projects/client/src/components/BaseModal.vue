@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-bind="$attrs">
+  <v-dialog v-bind="$attrs" v-on="$listeners">
     <template #activator="{ on, attrs }">
       <slot name="button" v-bind="{ on, attrs }" />
     </template>

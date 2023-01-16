@@ -32,8 +32,10 @@ export const SignUserIn = gql`
     user: User(first: 1, name: $name) {
       name
       userId
-      recommendedMovies(first: 25) {
+      recommendedMovies(first: 15) {
         title
+        plot
+        imdbRating
         poster
       }
     }
