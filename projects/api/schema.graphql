@@ -10,19 +10,6 @@ type User {
    userId: String! @id
    rated: [Movie] @relation(name: "RATED", direction: OUT)
    RATED_rel: [RATED]
-   recommendedMovies: [Movie]
-      @cypher(
-         statement: """
-            MATCH (this)-[r1:RATED]->(:Movie)<-[r2:RATED]-(peer:User)
-            WHERE abs(r1.rating - r2.rating) < 1
-            WITH this, peer
-            MATCH (peer)-[r3:RATED]->(rec:Movie)
-            WHERE r3.rating > 4 AND NOT EXISTS{ (this)-[:RATED]->(rec) }
-            WITH rec, count(*) as freq, avg(r3.rating) as rating
-            RETURN rec
-            ORDER BY rating DESC, freq DESC;
-         """
-      ) 
 }
 
 type Person {
@@ -137,4 +124,17 @@ type Query {
             YIELD node RETURN node;
          """
       )
+   UserRecommendedMovies(userId: String): [Movie]
+      @cypher(
+         statement: """
+            MATCH (u: User { userId: $userId })-[r1:RATED]->(:Movie)<-[r2:RATED]-(peer:User)
+            WHERE abs(r1.rating - r2.rating) < 1
+            WITH u, peer
+            MATCH (peer)-[r3:RATED]->(rec:Movie)
+            WHERE r3.rating > 4 AND NOT EXISTS{ (u)-[:RATED]->(rec) }
+            WITH rec, count(*) as freq, avg(r3.rating) as rating
+            RETURN rec
+            ORDER BY rating DESC, freq DESC;
+         """
+      ) 
 }
