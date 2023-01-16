@@ -2,6 +2,7 @@
   <v-bottom-navigation
     :value="value"
     color="primary"
+    app
     grow
     shift
   >
