@@ -124,6 +124,16 @@ type Query {
             YIELD node RETURN node;
          """
       )
+   UserFavoriteGenres(userId: String!): [Genre]
+      @cypher(
+         statement: """
+            MATCH (:User { userId: $userId })-[r:RATED]->(:Movie)-[:IN_GENRE]->(g:Genre)
+            WHERE r.rating > 3
+            WITH DISTINCT g, count(r) as c
+            RETURN g
+            ORDER BY c DESC
+         """
+      )
    UserRecommendedMovies(userId: String!): [Movie]
       @cypher(
          statement: """
@@ -137,14 +147,12 @@ type Query {
             ORDER BY rating DESC, freq DESC;
          """
       )
-   UserFavoriteGenres(userId: String!): [Genre]
+   UserRatedMovies(userId: String!): [Movie]
       @cypher(
          statement: """
-            MATCH (:User { userId: $userId })-[r:RATED]->(:Movie)-[:IN_GENRE]->(g:Genre)
-            WHERE r.rating > 3
-            WITH DISTINCT g, count(r) as c
-            RETURN g
-            ORDER BY c DESC
+            MATCH (:User { userId: $userId })-[r:RATED]->(m:Movie)
+            RETURN m
+            ORDER BY r.rating DESC
          """
       )
 }
