@@ -5,7 +5,25 @@ import routes from '../routes'
 
 Vue.use(VueRouter);
 
-export default new VueRouter({
+const router = new VueRouter({
   mode: 'history',
   routes
 });
+
+router.beforeEach((to, from, next) => {
+  const userData = localStorage.getItem("user");
+
+  if (userData && to.name === 'Login') {
+    next({ name: 'Home' });
+    return;
+  }
+
+  if (!userData && to.name !== 'Login') {
+    next({ name: 'Login' });
+    return;
+  }
+  
+  next();
+});
+
+export default router;

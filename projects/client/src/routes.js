@@ -1,6 +1,6 @@
 export default [
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: () => import("./views/Login.vue"),
   },
@@ -18,7 +18,7 @@ export default [
     component: () => import("./views/account/Update.vue"),
   },
   {
-    path: "/home",
+    path: "/",
     name: "Home",
     meta: {
       layout: "BaseLayout",
