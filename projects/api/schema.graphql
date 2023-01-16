@@ -117,14 +117,14 @@ type DIRECTED @relation(name: "DIRECTED") {
 }
 
 type Query {
-   MovieSearch(search: String): [Movie]
+   MovieSearch(search: String!): [Movie]
       @cypher(
          statement: """
             CALL db.index.fulltext.queryNodes('movieSearchIndex', $search+'~')
             YIELD node RETURN node;
          """
       )
-   UserRecommendedMovies(userId: String): [Movie]
+   UserRecommendedMovies(userId: String!): [Movie]
       @cypher(
          statement: """
             MATCH (u: User { userId: $userId })-[r1:RATED]->(:Movie)<-[r2:RATED]-(peer:User)
@@ -136,5 +136,15 @@ type Query {
             RETURN rec
             ORDER BY rating DESC, freq DESC;
          """
-      ) 
+      )
+   UserFavoriteGenres(userId: String!): [Genre]
+      @cypher(
+         statement: """
+            MATCH (:User { userId: $userId })-[r:RATED]->(:Movie)-[:IN_GENRE]->(g:Genre)
+            WHERE r.rating > 3
+            WITH DISTINCT g, count(r) as c
+            RETURN g
+            ORDER BY c DESC
+         """
+      )
 }
