@@ -82,13 +82,6 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          text
-          class="mx-2"
-          @click="back"
-        >
-          Voltar
-        </v-btn>
-        <v-btn
           color="primary"
           text
           :loading="isLoading"
@@ -133,9 +126,6 @@ export default {
     this.form.name = this.userLoggedIn.name;
   },
   methods: {
-    back() {
-      this.$router.go(-1);
-    },
     async updateAccount() {
       if (!this.$refs.name.valid) {
         this.$refs.name.validate();
