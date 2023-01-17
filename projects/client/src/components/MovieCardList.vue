@@ -6,11 +6,19 @@
       width="100%"
     >
       <v-slide-item
-        v-for="(movie, n) in userLoggedIn.recommendedMovies"
+        v-for="(movie, n) in movies"
         :key="n"
       >
-        <div>
+        <div class="ma-4">
+          <v-skeleton-loader
+            v-if="isLoading"
+            height="400"
+            width="300"
+            type="image"
+          />
+            
           <v-img
+            v-else
             height="400"
             width="300"
             :src="movie.poster"
@@ -24,18 +32,40 @@
 </template>
 
 <script>
-import { mapState } from 'pinia'
-
-import { useUserStore } from '@/stores'
+import { GetMovies } from '@/GraphQL/Movie.js'
 
 export default {
   name: 'MovieCardList',
-  data: () => ({
-    model: null,
-  }),
-  computed: {
-    ...mapState(useUserStore, ['userLoggedIn']),
+  props: {
+    genre: {
+      type: Object,
+      required: true
+    }
   },
+  apollo: {
+    movies: {
+      query: GetMovies,
+      loadingKey: 'isLoading',
+      skip () {
+        return !this.genre;
+      },
+      variables() {
+        return {
+          first: 10,
+          filter: {
+            in_genre: {
+              name: this.genre.name
+            }
+          },
+        }
+      }
+    }
+  },
+  data: () => ({
+    movies: new Array(10).fill({}),
+    model: null,
+    isLoading: 0
+  }),
 }
 </script>
 

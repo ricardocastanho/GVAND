@@ -112,11 +112,12 @@ export default {
 
         const userStore = useUserStore();
         userStore.setUserLoggedIn(data.user);
+        
+        this.$router.push({ name: 'Home' })
       } catch (e) {
         console.error(e)
       } finally {
         this.isLoading = false
-        this.$router.push({ name: 'Home' })
       }
     },
   }

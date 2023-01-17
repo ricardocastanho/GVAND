@@ -50,6 +50,7 @@
             <v-btn
               color="primary"
               text
+              :loading="isLoading"
               @click="signIn"
             >
               Entrar
@@ -74,6 +75,7 @@ export default {
         password: '',
       },
       showPassword: false,
+      isLoading: false,
     }
   },
   methods: {
@@ -83,6 +85,8 @@ export default {
         this.$refs.password.validate();
         return
       }
+
+      this.isLoading = true
 
       try {
         const { data } = await this.$apollo.query({
@@ -105,6 +109,8 @@ export default {
         this.$router.push({ name: 'Home' });
       } catch (e) {
         console.error(e);
+      } finally {
+        this.isLoading = false
       }
     },
     createAccount() {
