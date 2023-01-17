@@ -13,8 +13,13 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const userData = localStorage.getItem("user");
 
+  if (!to.name) {
+    next({ name: 'Login' });
+    return;
+  }
+
   if (userData && to.name === 'Login') {
-    next({ name: 'Home' });
+    next({ name: 'MoviesIndex' });
     return;
   }
 

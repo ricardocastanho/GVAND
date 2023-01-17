@@ -6,7 +6,7 @@
     grow
     shift
   >
-    <v-btn @click="goToHome">
+    <v-btn @click="goToMovies">
       <span>Filmes</span>
 
       <v-icon>mdi-movie</v-icon>
@@ -31,14 +31,14 @@
     name: 'TheBottomNavigation',
     data: () => ({ value: 0 }),
     methods: {
-      goToHome() {
-        this.$router.push({ name: 'Home' });
+      goToMovies() {
+        this.$router.push({ name: 'MoviesIndex' });
       },
       goToFavorites() {
-        this.$router.push({ name: 'Favorites' });
+        this.$router.push({ name: 'FavoritesIndex' });
       },
       goToProfile() {
-        this.$router.push({ name: 'UpdateAccount' });
+        this.$router.push({ name: 'ProfileEdit' });
       },
     },
   }

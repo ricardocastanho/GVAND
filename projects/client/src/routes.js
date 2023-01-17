@@ -1,28 +1,33 @@
 export default [
+  // Login
   {
     path: "/login",
     name: "Login",
     component: () => import("./views/Login.vue"),
   },
+
+  // Profile
   {
-    path: "/account/create",
-    name: "CreateAccount",
-    component: () => import("./views/account/Create.vue"),
+    path: "/profile/create",
+    name: "ProfileCreate",
+    component: () => import("./views/profile/Create.vue"),
   },
   {
-    path: "/account/update",
-    name: "UpdateAccount",
+    path: "/profile/update",
+    name: "ProfileEdit",
     meta: {
       layout: "BaseLayout",
     },
-    component: () => import("./views/account/Update.vue"),
+    component: () => import("./views/profile/Update.vue"),
   },
+
+  // Movies
   {
-    path: "/",
-    name: "Home",
+    path: "/movies",
+    name: "MoviesIndex",
     meta: {
       layout: "BaseLayout",
     },
-    component: () => import("./views/Home.vue"),
+    component: () => import("./views/movies/Index.vue"),
   },
 ];

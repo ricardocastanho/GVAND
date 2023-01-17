@@ -38,7 +38,7 @@
 
           <v-card-text>
             Ainda não possui uma conta?
-            <span class="text-decoration-underline" @click="createAccount" style="cursor: pointer;">
+            <span class="text-decoration-underline" @click="createProfile" style="cursor: pointer;">
               Clique aqui para criar!
             </span>
           </v-card-text>
@@ -106,15 +106,15 @@ export default {
         const userStore = useUserStore();
         userStore.setUserLoggedIn(user);
 
-        this.$router.push({ name: 'Home' });
+        this.$router.push({ name: 'MoviesIndex' });
       } catch (e) {
         console.error(e);
       } finally {
         this.isLoading = false
       }
     },
-    createAccount() {
-      this.$router.push({ name: 'CreateAccount' });
+    createProfile() {
+      this.$router.push({ name: 'ProfileCreate' });
     }
   }
 }

@@ -40,7 +40,7 @@ import MovieCardDetail from '@/components/MovieCardDetail.vue'
 import MovieCardList from '@/components/MovieCardList.vue'
 
 export default {
-  name: 'HomePage',
+  name: 'MoviesIndex',
   components: {
     BaseModalContent,
     MovieCarousel,

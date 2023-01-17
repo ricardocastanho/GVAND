@@ -61,7 +61,7 @@
               color="primary"
               text
               :loading="isLoading"
-              @click="createAccount"
+              @click="createProfile"
             >
               Criar
             </v-btn>
@@ -91,7 +91,7 @@ export default {
     }
   },
   methods: {
-    async createAccount() {
+    async createProfile() {
       if (!this.$refs.name.valid || !this.$refs.password.valid || !this.$refs.password2.valid) {
         this.$refs.name.validate();
         this.$refs.password.validate();
@@ -113,7 +113,7 @@ export default {
         const userStore = useUserStore();
         userStore.setUserLoggedIn(data.user);
         
-        this.$router.push({ name: 'Home' })
+        this.$router.push({ name: 'MoviesIndex' })
       } catch (e) {
         console.error(e)
       } finally {

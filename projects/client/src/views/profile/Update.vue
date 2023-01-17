@@ -70,7 +70,7 @@
                 text
                 dense
                 color="error"
-                @confirm="deleteAccount"
+                @confirm="deleteProfile"
               />
             </v-col>
           </v-row>
@@ -85,7 +85,7 @@
           color="primary"
           text
           :loading="isLoading"
-          @click="updateAccount"
+          @click="updateProfile"
         >
           Atualizar
         </v-btn>
@@ -126,7 +126,7 @@ export default {
     this.form.name = this.userLoggedIn.name;
   },
   methods: {
-    async updateAccount() {
+    async updateProfile() {
       if (!this.$refs.name.valid) {
         this.$refs.name.validate();
         return
@@ -151,7 +151,7 @@ export default {
         this.isLoading = false
       }
     },
-    async deleteAccount() {
+    async deleteProfile() {
       try {
         this.isLoading = true
 

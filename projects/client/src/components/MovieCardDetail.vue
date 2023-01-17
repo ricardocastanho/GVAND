@@ -43,6 +43,17 @@
         </v-card-text>
       </v-col>
     </v-row>
+
+    <v-card-actions>
+      <v-spacer />
+
+      <v-btn
+        color="primary"
+        text
+      >
+        Ver Mais
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 

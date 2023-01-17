@@ -11,7 +11,7 @@
         </v-list-item-avatar>
       </v-list-item>
 
-      <v-list-item link @click="updateAccount">
+      <v-list-item link @click="updateProfile">
         <v-list-item-content>
           <v-list-item-title class="text-h6">
             {{ userLoggedIn.name }}
@@ -56,8 +56,8 @@ export default {
     ...mapState(useUserStore, ['userLoggedIn']),
   },
   methods: {
-    updateAccount() {
-      this.$router.push({ name: 'UpdateAccount' });
+    updateProfile() {
+      this.$router.push({ name: 'ProfileEdit' });
     },
   },
 }
