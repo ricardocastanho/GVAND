@@ -19,4 +19,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  css: {
+    preprocessorOptions: {
+      sass: {
+        additionalData: [
+          '@import "./src/styles/variables"',
+          '@import "vuetify/src/styles/settings/_variables"',
+          '',
+        ].join('\n'),
+      },
+    },
+  },
 })
