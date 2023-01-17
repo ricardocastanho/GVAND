@@ -12,9 +12,12 @@
       <v-col md="7">
         <v-card-title class="text-h5">
           {{ movie.title }}
+          <span class="text-caption ml-2">
+            ({{ movie.year }})
+          </span>
         </v-card-title>
 
-        <v-card-text>
+        <v-card-text style="padding: 0px 16px;">
           Avaliação dos usuários:
         </v-card-text>
         
