@@ -1,6 +1,6 @@
 <template>
   <v-row cols="12">
-    <v-col md="5">
+    <v-col lg="3" md="5">
       <v-skeleton-loader
         v-if="isLoading"
         height="400"
@@ -18,14 +18,14 @@
       />
     </v-col>
     
-    <v-col md="7">
+    <v-col lg="9" md="7">
       <v-skeleton-loader
         v-if="isLoading"
         width="300"
         type="text"
       />
 
-      <v-card-title v-else class="text-h5">
+      <v-card-title v-else class="text-lg-h3 text-h5">
         {{ movie.title }}
         <span class="text-caption ml-2">
           ({{ movie.year }})
@@ -38,7 +38,7 @@
         type="text"
       />
 
-      <v-card-text v-else style="padding: 0px 16px;">
+      <v-card-text v-else style="padding: 0px 16px;" class="text-body-1">
         Avaliação dos usuários:
       </v-card-text>
 
@@ -58,7 +58,7 @@
         color="yellow lighten-1"
         background-color="gray"
         length="5"
-        size="15"
+        size="20"
         :value="movie.imdbRating / 2"
         class="pl-2"
       />
@@ -69,7 +69,7 @@
         type="text, text, text, text, text, text"
       />
 
-      <v-card-text v-else>
+      <v-card-text v-else class="text-body-1">
         <span class="font-weight-bold">
           Sinopse:
         </span>

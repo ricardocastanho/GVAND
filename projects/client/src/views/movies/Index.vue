@@ -20,7 +20,7 @@
         <MovieCardListByGenre :genre="genre" @click:card="openMovieDetails" />
       </div>
   
-      <BaseModalContent v-model="showMovieDetailModal" height="auto" width="800">
+      <BaseModalContent v-model="showMovieDetailModal" height="auto" max-width="1200">
         <BaseMovieDetailCard :movie="selectedMovie" @click:movie-details="goToMovieDetails" />
       </BaseModalContent>
     </v-container>
