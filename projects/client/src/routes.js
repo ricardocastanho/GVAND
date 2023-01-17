@@ -30,4 +30,13 @@ export default [
     },
     component: () => import("./views/movies/Index.vue"),
   },
+  {
+    path: "/movies/:movieId",
+    name: "MoviesDetail",
+    props: true,
+    meta: {
+      layout: "BaseLayout",
+    },
+    component: () => import("./views/movies/_movieId/Index.vue"),
+  },
 ];

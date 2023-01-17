@@ -1,2 +1,34 @@
 $skeleton-loader-image-height: 400px;
 $skeleton-loader-text-height: 24px;
+
+.card-image {
+  filter: brightness(80%);
+}
+
+.card-image:hover {
+  cursor: pointer;
+}
+
+.card-title {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.carousel-image {
+  filter: brightness(50%);
+}
+
+.carousel-title {
+  position: absolute;
+  bottom: 70px;
+  left: 16px;
+}
+
+.carousel-subtitle {
+  position: absolute;
+  bottom: 30px;
+  left: 16px;
+  max-height: 80px;
+  max-width: 50%;
+}

@@ -1,7 +1,7 @@
 <template>
   <span>
     <v-container fluid style="padding: 0px !important">
-      <MovieCarousel />
+      <BaseMovieCarousel />
     </v-container>
     <v-container fluid class="mt-10">
       <div v-for="(genre, i) in genres" :key="i">
@@ -17,11 +17,11 @@
           </span>
         </v-card-title>
         
-        <MovieCardList :genre="genre" @click:card="openMovieDetails" />
+        <MovieCardListByGenre :genre="genre" @click:card="openMovieDetails" />
       </div>
   
       <BaseModalContent v-model="showMovieDetailModal" height="auto" width="800">
-        <MovieCardDetail :movie="selectedMovie" />
+        <BaseMovieDetailCard :movie="selectedMovie" @click:movie-details="goToMovieDetails" />
       </BaseModalContent>
     </v-container>
   </span>
@@ -35,17 +35,17 @@ import { useUserStore } from '@/stores'
 import { UserFavoriteGenres } from '@/GraphQL/User.js'
 
 import BaseModalContent from '@/components/BaseModalContent.vue'
-import MovieCarousel from '@/components/MovieCarousel.vue'
-import MovieCardDetail from '@/components/MovieCardDetail.vue'
-import MovieCardList from '@/components/MovieCardList.vue'
+import BaseMovieCarousel from '@/components/BaseMovieCarousel.vue'
+import BaseMovieDetailCard from '@/components/BaseMovieDetailCard.vue'
+import MovieCardListByGenre from '@/components/MovieCardListByGenre.vue'
 
 export default {
   name: 'MoviesIndex',
   components: {
     BaseModalContent,
-    MovieCarousel,
-    MovieCardDetail,
-    MovieCardList,
+    BaseMovieCarousel,
+    BaseMovieDetailCard,
+    MovieCardListByGenre,
   },
   apollo: {
     genres: {
@@ -77,6 +77,14 @@ export default {
     openMovieDetails(movie) {
       this.selectedMovie = { ...movie };
       this.showMovieDetailModal = true;
+    },
+    goToMovieDetails(movie) {
+      this.$router.push({
+        name: 'MoviesDetail',
+        params: {
+          movieId: movie.movieId,
+        }
+      });
     }
   }
 }

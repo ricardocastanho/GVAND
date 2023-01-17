@@ -30,7 +30,7 @@
 import { movies } from '@/mock.json'
 
 export default {
-  name: 'MovieCarousel',
+  name: 'BaseMovieCarousel',
   data () {
     return {
       movies
@@ -38,23 +38,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.carousel-image {
-  filter: brightness(50%);
-}
-
-.carousel-title {
-  position: absolute;
-  bottom: 70px;
-  left: 16px;
-}
-
-.carousel-subtitle {
-  position: absolute;
-  bottom: 30px;
-  left: 16px;
-  max-height: 80px;
-  max-width: 50%;
-}
-</style>
