@@ -6,7 +6,7 @@ import routes from '../routes'
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: import.meta.env.MODE === 'development' ? 'hash' : 'history',
   routes
 });
 
