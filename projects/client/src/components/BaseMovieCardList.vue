@@ -11,14 +11,14 @@
       <div class="ma-4">
         <v-skeleton-loader
           v-if="isLoading"
-          height="400"
+          height="450"
           width="300"
           type="image"
         />
           
         <v-img
           v-else
-          height="400"
+          height="450"
           width="300"
           :src="movie.poster"
           class="ma-4 card-image"
