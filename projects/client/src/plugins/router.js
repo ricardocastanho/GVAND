@@ -7,7 +7,14 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: import.meta.env.MODE === 'development' ? 'hash' : 'history',
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ x: 0, y: 0, behavior: 'smooth' })
+      }, 500)
+    })
+  },
 });
 
 router.beforeEach((to, from, next) => {
