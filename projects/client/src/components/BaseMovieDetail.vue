@@ -40,40 +40,86 @@
         </span>
       </v-card-title>
 
+      <div class="d-flex flex-row mb-6">
+        <div class="mx-2">
+          <v-skeleton-loader
+            v-if="isLoading"
+            width="200"
+            type="text"
+          />
+    
+          <v-card-text v-else style="padding: 0px 16px;" class="text-body-1">
+            Avaliação dos usuários:
+          </v-card-text>
+
+          <v-skeleton-loader
+            v-if="isLoading"
+            width="150"
+            type="text"
+          />
+
+          <div v-else>
+            <v-rating
+              empty-icon="mdi-star-outline"
+              full-icon="mdi-star"
+              half-icon="mdi-star-half-full"
+              hover
+              readonly
+              color="yellow lighten-1"
+              background-color="gray"
+              length="5"
+              size="20"
+              :value="avgRate"
+              class="pl-2"
+            />
+            
+            <v-card-text class="text-subtitle-1 text-center font-weight-bold" style="padding: 0px 16px;">
+              {{ avgRate }}
+            </v-card-text>
+          </div>
+        </div>
+
+        <div class="mx-2">
+          <v-skeleton-loader
+            v-if="isLoading"
+            width="200"
+            type="text"
+          />
+    
+          <v-card-text v-else style="padding: 0px 16px;" class="text-body-1">
+            Sua avaliação:
+          </v-card-text>
+
+          <v-skeleton-loader
+            v-if="isLoading"
+            width="150"
+            type="text"
+          />
+
+          <div v-else>
+            <v-rating
+              v-model="userRate"
+              empty-icon="mdi-star-outline"
+              full-icon="mdi-star"
+              half-icon="mdi-star-half-full"
+              hover
+              color="primary lighten-1"
+              background-color="gray"
+              length="5"
+              size="20"
+              class="pl-2"
+            />
+            
+            <v-card-text class="text-subtitle-1 text-center font-weight-bold" style="padding: 0px 16px;">
+              {{ userRate }}
+            </v-card-text>
+          </div>
+        </div>
+      </div>
+
       <v-skeleton-loader
         v-if="isLoading"
-        width="200"
-        type="text"
-      />
-
-      <v-card-text v-else style="padding: 0px 16px;" class="text-body-1">
-        Avaliação dos usuários:
-      </v-card-text>
-
-      <v-skeleton-loader
-        v-if="isLoading"
-        width="150"
-        type="text"
-      />
-
-      <v-rating
-        v-else
-        empty-icon="mdi-star-outline"
-        full-icon="mdi-star"
-        half-icon="mdi-star-half-full"
-        hover
-        readonly
-        color="yellow lighten-1"
-        background-color="gray"
-        length="5"
-        size="20"
-        :value="movie.imdbRating / 2"
-        class="pl-2"
-      />
-
-      <v-skeleton-loader
-        v-if="isLoading"
-        width="600"
+        width="90%"
         type="text, text, text, text, text, text"
       />
 
@@ -88,6 +134,10 @@
 </template>
 
 <script>
+import { mapState } from 'pinia'
+
+import { useUserStore } from '@/stores'
+
 export default {
   name: 'BaseMovieDetail',
   props: {
@@ -99,6 +149,35 @@ export default {
       type: Boolean,
       default: false,
     }
-  }
+  },
+  data() {
+    return {
+      rating: null,
+    }
+  },
+  computed: {
+    ...mapState(useUserStore, ['userLoggedIn']),
+    avgRate() {
+      return Number(this.movie.avgRate.toFixed(1));
+    },
+    userRate: {
+      get() {
+        return this.rating || this.movie.user_rated;
+      },
+      set(rating) {
+        this.rating = rating;
+        this.$emit('set-movie-rating', {
+          rating,
+          movieId: this.movie.movieId,
+          userId: this.userLoggedIn.userId,
+        });
+      }
+    }
+  },
+  watch: {
+    movie() {
+      this.rating = null;
+    }
+  },
 }
 </script>

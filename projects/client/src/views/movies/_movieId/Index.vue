@@ -1,7 +1,11 @@
 <template>
   <v-container class="my-10">
     <v-card class="pa-8">
-      <BaseMovieDetail :movie="movie" :is-loading="!!isLoading" />
+      <BaseMovieDetail
+        :movie="movie"
+        :is-loading="!!isLoading"
+        @set-movie-rating="$_movieRateMixin_mergeMovieRating"
+      />
     </v-card>
 
     <v-card class="pa-8 mt-5">
@@ -24,19 +28,31 @@
       />
     </v-card>
 
-    <BaseModalContent v-model="showMovieDetailModal" height="auto" max-width="1200">
-      <BaseMovieDetailCard :movie="selectedMovie" @click:movie-details="goToMovieDetails" />
+    <BaseModalContent
+      v-model="showMovieDetailModal"
+      height="auto"
+      max-width="1200"
+    >
+      <BaseMovieDetailCard
+        :movie="selectedMovie"
+        @click:movie-details="goToMovieDetails"
+        @set-movie-rating="$_movieRateMixin_mergeMovieRating"
+      />
     </BaseModalContent>
   </v-container>
 </template>
 
 <script>
+import { mapState } from 'pinia'
+
+import { useUserStore } from '@/stores'
+import { movieRateMixin } from '@/mixins/Movie.js'
+import { GetMovieDetails } from '@/GraphQL/Movie.js'
+
 import BaseModalContent from '@/components/BaseModalContent.vue'
 import BaseMovieDetail from '@/components/BaseMovieDetail.vue';
 import BaseMovieDetailCard from '@/components/BaseMovieDetailCard.vue'
 import BaseMovieCardList from '@/components/BaseMovieCardList.vue'
-
-import { GetMovieDetails } from '@/GraphQL/Movie.js'
 
 export default {
   name: 'MoviesDetail',
@@ -45,7 +61,8 @@ export default {
     BaseMovieDetail,
     BaseMovieDetailCard,
     BaseMovieCardList,
-},
+  },
+  mixins: [movieRateMixin],
   props: {
     movieId: {
       type: String,
@@ -58,13 +75,14 @@ export default {
       loadingKey: 'isLoading',
       update: ({ movie }) => movie.at(0),
       skip() {
-        return !this.movieId;
+        return !this.movieId || !this.userLoggedIn.userId;
       },
       variables() {
         return {
           filter: {
             movieId: this.movieId,
           },
+          userId: this.userLoggedIn.userId
         }
       }
     }
@@ -78,6 +96,9 @@ export default {
       selectedMovie: null,
       isLoading: 0,
     }
+  },
+  computed: {
+    ...mapState(useUserStore, ['userLoggedIn']),
   },
   methods: {
     openMovieDetails(movie) {
@@ -93,6 +114,9 @@ export default {
           movieId: movie.movieId,
         }
       });
+    },
+    p () {
+      console.log('object');
     }
   }
 }   

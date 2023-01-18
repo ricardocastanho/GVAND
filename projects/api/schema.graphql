@@ -62,13 +62,13 @@ type Director {
 
 type Movie {
    _id: Long!
+   movieId: String! @id
    budget: Int
    countries: [String]
    imdbId: String!
    imdbRating: Float
    imdbVotes: Int
    languages: [String]
-   movieId: String!
    plot: String
    poster: String
    released: String
@@ -80,6 +80,21 @@ type Movie {
    year: Int
    in_genre: [Genre] @relation(name: "IN_GENRE", direction: OUT)
    users_rated: [User] @relation(name: "RATED", direction: IN)
+   avgRate: Float
+      @cypher(
+         statement: """
+            MATCH (this)<-[r:RATED]-(:User)
+            RETURN avg(r.rating)
+         """
+      )
+   user_rated(userId: String!): Float
+      @cypher(
+         statement: """
+            MATCH (this)<-[r:RATED]-(:User { userId: $userId })
+            RETURN r.rating
+            LIMIT 1
+         """
+      )
    similar: [Movie]
       @cypher(
          statement: """

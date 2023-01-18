@@ -7,15 +7,21 @@ export const MovieFragment = gql`
     plot
     poster
     year
-    imdbRating
+    avgRate
     in_genre {
       name
     }
+    user_rated(userId: $userId)
   }
 `
 
 export const GetMovies = gql`
-  query Movie($first: Int, $filter: _MovieFilter, $orderBy: [_MovieOrdering]) {
+  query Movie(
+    $first: Int,
+    $filter: _MovieFilter,
+    $orderBy: [_MovieOrdering],
+    $userId: String!
+  ) {
     movies: Movie(first: $first, filter: $filter, orderBy: $orderBy) {
       ...movie
     }
@@ -25,7 +31,7 @@ export const GetMovies = gql`
 `;
 
 export const GetMovieDetails = gql`
-  query Movie($filter: _MovieFilter) {
+  query Movie($filter: _MovieFilter, $userId: String!) {
     movie: Movie(filter: $filter, first: 1) {
       ...movie
       similar(first: 15) {
@@ -35,4 +41,12 @@ export const GetMovieDetails = gql`
   }
 
   ${MovieFragment}
+`;
+
+export const MergeUserRate = gql`
+  mutation MergeUserRATED_rel($from: _UserInput!, $to: _MovieInput!, $data: _RATEDInput!) {
+    rate: MergeUserRATED_rel(from: $from, to: $to, data: $data) {
+      rating
+    }
+  }
 `;

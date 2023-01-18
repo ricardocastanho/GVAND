@@ -1,6 +1,6 @@
 <template>
   <v-card class="pa-8">
-    <BaseMovieDetail :movie="movie" />
+    <BaseMovieDetail :movie="movie" v-on="$listeners" />
 
     <v-card-actions>
       <v-spacer />

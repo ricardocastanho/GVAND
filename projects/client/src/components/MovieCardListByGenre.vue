@@ -8,8 +8,11 @@
 </template>
 
 <script>
+import { mapState } from 'pinia'
+
 import BaseMovieCardList from '@/components/BaseMovieCardList.vue'
 
+import { useUserStore } from '@/stores'
 import { GetMovies } from '@/GraphQL/Movie.js'
 
 export default {
@@ -38,6 +41,7 @@ export default {
               name: this.genre.name,
             }
           },
+          userId: this.userLoggedIn.userId
         }
       }
     }
@@ -46,5 +50,8 @@ export default {
     movies: new Array(10).fill({}),
     isLoading: 0
   }),
+  computed: {
+    ...mapState(useUserStore, ['userLoggedIn']),
+  },
 }
 </script>

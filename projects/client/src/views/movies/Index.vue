@@ -21,7 +21,11 @@
       </div>
   
       <BaseModalContent v-model="showMovieDetailModal" height="auto" max-width="1200">
-        <BaseMovieDetailCard :movie="selectedMovie" @click:movie-details="goToMovieDetails" />
+        <BaseMovieDetailCard
+          :movie="selectedMovie"
+          @click:movie-details="goToMovieDetails"
+          @set-movie-rating="$_movieRateMixin_mergeMovieRating"
+        />
       </BaseModalContent>
     </v-container>
   </span>
@@ -30,8 +34,8 @@
 <script>
 import { mapState } from 'pinia'
 
-import { greetUser } from '@/helpers'
 import { useUserStore } from '@/stores'
+import { movieRateMixin } from '@/mixins/Movie.js'
 import { UserFavoriteGenres } from '@/GraphQL/User.js'
 
 import BaseModalContent from '@/components/BaseModalContent.vue'
@@ -47,6 +51,7 @@ export default {
     BaseMovieDetailCard,
     MovieCardListByGenre,
   },
+  mixins: [movieRateMixin],
   apollo: {
     genres: {
       query: UserFavoriteGenres,
@@ -69,9 +74,6 @@ export default {
   },
   computed: {
     ...mapState(useUserStore, ['userLoggedIn']),
-    greet() {
-      return greetUser(this.userLoggedIn.name)
-    }
   },
   methods: {
     openMovieDetails(movie) {
