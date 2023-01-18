@@ -23,7 +23,15 @@
           :src="movie.poster"
           class="ma-4 card-image"
           @click="() => $emit('click:card', movie)"
-        />
+        >
+          <template v-slot:placeholder>
+            <v-skeleton-loader
+              height="450"
+              width="300"
+              type="image"
+            />
+          </template>
+        </v-img>
       </div>
     </v-slide-item>
   </v-slide-group>

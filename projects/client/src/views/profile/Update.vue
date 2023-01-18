@@ -1,10 +1,18 @@
 <template>
   <v-container fill-height fluid class="d-flex align-center justify-center mb-6">
     <v-avatar size="300" class="mx-6">
-      <img
+      <v-img
         alt="user"
-        src="https://avatars.githubusercontent.com/u/48383095?v=4"
+        src="/img/user-placeholder.png"
       >
+        <template v-slot:placeholder>
+          <v-skeleton-loader
+            height="450"
+            width="300"
+            type="image"
+          />
+        </template>
+      </v-img>
     </v-avatar>
 
     <v-card ref="form" width="700" class="mx-6">
