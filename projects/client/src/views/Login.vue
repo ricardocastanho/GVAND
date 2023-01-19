@@ -50,7 +50,7 @@
             <v-btn
               color="primary"
               text
-              :loading="isLoading"
+              :loading="!!isLoading"
               @click="signIn"
             >
               Entrar
@@ -75,7 +75,7 @@ export default {
         password: '',
       },
       showPassword: false,
-      isLoading: false,
+      isLoading: 0,
     }
   },
   methods: {
@@ -86,7 +86,7 @@ export default {
         return
       }
 
-      this.isLoading = true
+      this.isLoading = 1
 
       try {
         const { data } = await this.$apollo.query({
@@ -110,7 +110,7 @@ export default {
       } catch (e) {
         console.error(e);
       } finally {
-        this.isLoading = false
+        this.isLoading = 0
       }
     },
     createProfile() {

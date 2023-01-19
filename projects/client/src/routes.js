@@ -39,4 +39,13 @@ export default [
     },
     component: () => import("./views/movies/_movieId/Index.vue"),
   },
+  {
+    path: "/search",
+    name: "SearchIndex",
+    props: true,
+    meta: {
+      layout: "BaseLayout",
+    },
+    component: () => import("./views/movies/search/Index.vue"),
+  },
 ];

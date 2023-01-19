@@ -60,7 +60,7 @@
             <v-btn
               color="primary"
               text
-              :loading="isLoading"
+              :loading="!!isLoading"
               @click="createProfile"
             >
               Criar
@@ -87,7 +87,7 @@ export default {
       },
       showPassword: false,
       showPassword2: false,
-      isLoading: false,
+      isLoading: 0,
     }
   },
   methods: {
@@ -100,7 +100,7 @@ export default {
       }
       
       try {
-        this.isLoading = true
+        this.isLoading = 1
 
         const { data } = await this.$apollo.mutate({
           mutation: CreateUser,
@@ -117,7 +117,7 @@ export default {
       } catch (e) {
         console.error(e)
       } finally {
-        this.isLoading = false
+        this.isLoading = 0
       }
     },
   }

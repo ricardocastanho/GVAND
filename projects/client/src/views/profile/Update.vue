@@ -92,7 +92,7 @@
         <v-btn
           color="primary"
           text
-          :loading="isLoading"
+          :loading="!!isLoading"
           @click="updateProfile"
         >
           Atualizar
@@ -123,7 +123,7 @@ export default {
       },
       showPassword: false,
       showPassword2: false,
-      isLoading: false,
+      isLoading: 0,
       confirmDeleteDialog: false,
     }
   },
@@ -141,7 +141,7 @@ export default {
       }
       
       try {
-        this.isLoading = true
+        this.isLoading = 1
 
         const { data } = await this.$apollo.mutate({
           mutation: UpdateUser,
@@ -156,12 +156,12 @@ export default {
       } catch (e) {
         console.error(e)
       } finally {
-        this.isLoading = false
+        this.isLoading = 0
       }
     },
     async deleteProfile() {
       try {
-        this.isLoading = true
+        this.isLoading = 1
 
         await this.$apollo.mutate({
           mutation: DeleteUser,
@@ -177,7 +177,7 @@ export default {
       } catch (e) {
         console.error(e)
       } finally {
-        this.isLoading = false
+        this.isLoading = 0
       }
     },
   }

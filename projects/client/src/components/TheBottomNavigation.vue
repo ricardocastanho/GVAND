@@ -12,6 +12,12 @@
       <v-icon>mdi-movie</v-icon>
     </v-btn>
 
+    <v-btn @click="goToSearch">
+      <span>Pesquisar</span>
+
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
+
     <v-btn @click="goToFavorites">
       <span>Favoritos</span>
 
@@ -33,6 +39,9 @@
     methods: {
       goToMovies() {
         this.$router.push({ name: 'MoviesIndex' });
+      },
+      goToSearch() {
+        this.$router.push({ name: 'SearchIndex' });
       },
       goToFavorites() {
         this.$router.push({ name: 'FavoritesIndex' });
