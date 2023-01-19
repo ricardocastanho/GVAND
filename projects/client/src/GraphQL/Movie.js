@@ -53,6 +53,16 @@ export const MovieSearch = gql`
   ${MovieFragment}
 `;
 
+export const UserRatedMovies = gql`
+  query UserRatedMovies($userId: String!, $first: Int) {
+    movies: UserRatedMovies(userId: $userId, first: $first) {
+      ...movie
+    }
+  }
+
+  ${MovieFragment}
+`;
+
 export const MergeUserRate = gql`
   mutation MergeUserRATED_rel($from: _UserInput!, $to: _MovieInput!, $data: _RATEDInput!) {
     rate: MergeUserRATED_rel(from: $from, to: $to, data: $data) {

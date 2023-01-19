@@ -48,4 +48,12 @@ export default [
     },
     component: () => import("./views/movies/search/Index.vue"),
   },
+  {
+    path: "/favorites",
+    name: "FavoritesIndex",
+    meta: {
+      layout: "BaseLayout",
+    },
+    component: () => import("./views/movies/favorites/Index.vue"),
+  },
 ];
