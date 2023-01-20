@@ -25,6 +25,11 @@ router.beforeEach((to, from, next) => {
     return;
   }
 
+  if (from.name === 'Login' && to.name === 'ProfileCreate') {
+    next();
+    return;
+  }
+
   if (userData && to.name === 'Login') {
     next({ name: 'MoviesIndex' });
     return;
