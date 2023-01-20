@@ -3,11 +3,24 @@
     <v-container fluid style="padding: 0px !important">
       <BaseMovieCarousel />
     </v-container>
+
     <v-container fluid class="mt-10">
+      <div>
+        <v-card-title class="text-h5">
+          Filmes recomendados
+        </v-card-title>
+  
+        <BaseMovieCardList
+          :movies="recommendedMovies"
+          :is-loading="!!isLoadingRecommended"
+          @click:card="openMovieDetails"
+        />
+      </div>
+      
       <div v-for="(genre, i) in genres" :key="i">
         <v-card-title class="text-h5">
           <v-skeleton-loader
-            v-if="isLoading"
+            v-if="isLoadingGenres"
             width="200px"
             type="text"
           />
@@ -37,10 +50,12 @@ import { mapState } from 'pinia'
 import { useUserStore } from '@/stores'
 import { movieRateMixin } from '@/mixins/Movie.js'
 import { UserFavoriteGenres } from '@/GraphQL/User.js'
+import { UserRecommendedMovies } from '@/GraphQL/Movie.js'
 
 import BaseModalContent from '@/components/BaseModalContent.vue'
 import BaseMovieCarousel from '@/components/BaseMovieCarousel.vue'
 import BaseMovieDetailCard from '@/components/BaseMovieDetailCard.vue'
+import BaseMovieCardList from '@/components/BaseMovieCardList.vue'
 import MovieCardListByGenre from '@/components/MovieCardListByGenre.vue'
 
 export default {
@@ -49,17 +64,29 @@ export default {
     BaseModalContent,
     BaseMovieCarousel,
     BaseMovieDetailCard,
+    BaseMovieCardList,
     MovieCardListByGenre,
   },
   mixins: [movieRateMixin],
   apollo: {
     genres: {
       query: UserFavoriteGenres,
-      loadingKey: 'isLoading',
+      loadingKey: 'isLoadingGenres',
       variables() {
         return {
           userId: this.userLoggedIn.userId,
           first: 5,
+        }
+      }
+    },
+    recommendedMovies: {
+      query: UserRecommendedMovies,
+      loadingKey: 'isLoadingRecommended',
+      update: ({ movies }) => movies,
+      variables() {
+        return {
+          userId: this.userLoggedIn.userId,
+          first: 10,
         }
       }
     }
@@ -67,9 +94,11 @@ export default {
   data() {
     return {
       genres: new Array(5).fill({}),
+      recommendedMovies: new Array(10).fill({}),
       showMovieDetailModal: false,
       selectedMovie: null,
-      isLoading: 0
+      isLoadingGenres: 0,
+      isLoadingRecommended: 0,
     }
   },
   computed: {
