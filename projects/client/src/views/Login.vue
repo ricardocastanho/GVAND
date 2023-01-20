@@ -38,9 +38,13 @@
 
           <v-card-text>
             Ainda não possui uma conta?
-            <span class="text-decoration-underline" @click="createProfile" style="cursor: pointer;">
+            <router-link
+              class="text-decoration-underline"
+              :to="{ name: 'ProfileCreate' }"
+              style="cursor: pointer;"
+            >
               Clique aqui para criar!
-            </span>
+            </router-link>
           </v-card-text>
 
           <v-divider class="mt-6"></v-divider>
@@ -112,9 +116,6 @@ export default {
       } finally {
         this.isLoading = 0
       }
-    },
-    createProfile() {
-      this.$router.push({ name: 'ProfileCreate' });
     }
   }
 }
