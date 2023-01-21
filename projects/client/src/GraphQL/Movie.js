@@ -53,6 +53,16 @@ export const MovieSearch = gql`
   ${MovieFragment}
 `;
 
+export const MovieSearchSelect = gql`
+  query MovieSearch($search: String! $first: Int) {
+    movies: MovieSearch(search: $search, first: $first) {
+      movieId
+      title
+      poster
+    }
+  }
+`;
+
 export const UserRatedMovies = gql`
   query UserRatedMovies($userId: String!, $first: Int) {
     movies: UserRatedMovies(userId: $userId, first: $first) {

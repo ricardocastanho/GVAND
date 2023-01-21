@@ -25,7 +25,7 @@
           {{ cancelButtonText }}
         </v-btn>
 
-        <v-btn text @click="$emit('confirm')">
+        <v-btn text :loading="isLoading" @click="$emit('confirm')">
           {{ confirmButtonText }}
         </v-btn>
       </v-card-actions>
@@ -61,6 +61,10 @@ export default {
     buttonText: {
       type: String,
       default: 'Confirmar'
+    },
+    isLoading: {
+      type: Boolean,
+      default: false
     },
   },
   methods: {

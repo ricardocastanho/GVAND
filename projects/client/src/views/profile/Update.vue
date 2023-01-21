@@ -100,6 +100,7 @@
                     text
                     dense
                     color="error"
+                    :is-loading="!!isDeleting"
                     @confirm="deleteProfile"
                   />
                 </v-col>
@@ -150,6 +151,7 @@ export default {
       showPassword: false,
       showPassword2: false,
       isLoading: 0,
+      isDeleting: 0,
       confirmDeleteDialog: false,
     }
   },
@@ -186,7 +188,7 @@ export default {
     },
     async deleteProfile() {
       try {
-        this.isLoading = 1
+        this.isDeleting = 1
 
         await this.$apollo.mutate({
           mutation: DeleteUser,
@@ -199,7 +201,7 @@ export default {
       } catch (e) {
         console.error(e)
       } finally {
-        this.isLoading = 0
+        this.isDeleting = 0
       }
     },
     logout() {

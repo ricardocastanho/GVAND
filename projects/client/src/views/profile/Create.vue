@@ -3,9 +3,9 @@
     <v-row justify="center">
       <v-col
         cols="12"
-        sm="10"
-        md="6"
-        lg="4"
+        sm="12"
+        md="10"
+        lg="6"
       >
         <v-card ref="form">
           <v-card-title class="text-h4">
@@ -51,6 +51,21 @@
               @click:append="showPassword2 = !showPassword2"
               required
             ></v-text-field>
+
+            <MovieSelect
+              :favorites.sync="form.movies"
+              :movies="movies"
+              :search-input.sync="search"
+              :disabled="!!isLoadingSearch"
+              :loading="!!isLoadingSearch"
+              prepend-icon="mdi-movie"
+              item-value="movieId"
+              item-text="title"
+              label="Selecione seus filmes favoritos:"
+              multiple
+              return-object
+              :rules="[() => !!form.movies.length || 'O campo é obrigatório']"
+            />
           </v-card-text>
 
           <v-divider class="mt-6"></v-divider>
@@ -74,20 +89,45 @@
 
 <script>
 import { CreateUser } from '@/GraphQL/User.js'
+import { MovieSearchSelect } from '@/GraphQL/Movie.js'
+import { movieRateMixin } from '@/mixins/Movie.js'
 import { useUserStore } from '@/stores'
+
+import MovieSelect from '@/components/MovieSelect.vue'
 
 export default {
   name: 'LoginPage',
+  components: {
+    MovieSelect,
+  },
+  mixins: [movieRateMixin],
+  apollo: {
+    movies: {
+      query: MovieSearchSelect,
+      debounce: 500,
+      loadingKey: 'isLoadingSearch',
+      variables() {
+        return {
+          search: this.search || 'A',
+          first: 20,
+        }
+      }
+    }
+  },
   data () {
     return {
       form: {
         name: '',
         password: '',
         password2: '',
+        movies: []
       },
+      movies: [],
       showPassword: false,
       showPassword2: false,
       isLoading: 0,
+      isLoadingSearch: 0,
+      search: ''
     }
   },
   methods: {
@@ -110,14 +150,26 @@ export default {
           }
         })
 
+        const { movies } = this.form;
+
+        const promises = movies.map(movie => {
+          return this.$_movieRateMixin_mergeMovieRating({
+            movieId: movie.movieId,
+            userId: data.user.userId,
+            rating: 5,
+          });
+        });
+
+        await Promise.all(promises);
+
         const userStore = useUserStore();
         userStore.setUserLoggedIn(data.user);
         
-        this.$router.push({ name: 'MoviesIndex' })
+        this.$router.push({ name: 'MoviesIndex' });
       } catch (e) {
-        console.error(e)
+        console.error(e);
       } finally {
-        this.isLoading = 0
+        this.isLoading = 0;
       }
     },
   }

@@ -3,9 +3,9 @@
     <v-row justify="center">
       <v-col
         cols="12"
-        sm="10"
-        md="6"
-        lg="4"
+        sm="12"
+        md="10"
+        lg="6"
       >
         <v-card ref="form">
           <v-card-title class="text-h4">
