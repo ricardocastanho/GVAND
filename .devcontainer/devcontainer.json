@@ -13,7 +13,7 @@
 	},
 	"postCreateCommand": {
     "api": "cd projects/api && yarn install",
-    "client": "cd projects/client && yarn install"
-  },
-	"postStartCommand": "cp .env.example .env"
+    "client": "cd projects/client && yarn install",
+		"env": "cp .env.example .env"
+  }
 }
