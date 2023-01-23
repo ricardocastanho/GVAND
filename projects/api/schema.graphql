@@ -135,8 +135,10 @@ type Query {
    MovieSearch(search: String!): [Movie]
       @cypher(
          statement: """
-            CALL db.index.fulltext.queryNodes('movieSearchIndex', $search+'~')
-            YIELD node RETURN node;
+            CALL db.index.fulltext.queryNodes('movieSearchIndex', $search+'~') YIELD node
+            MATCH (node)-[:ACTED_IN*0..1]->(movie:Movie)
+            WITH movie
+            RETURN movie;
          """
       )
    UserFavoriteGenres(userId: String!): [Genre]
