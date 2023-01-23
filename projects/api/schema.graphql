@@ -166,6 +166,7 @@ type Query {
       @cypher(
          statement: """
             MATCH (:User { userId: $userId })-[r:RATED]->(m:Movie)
+            WHERE r.rating > 3
             RETURN m
             ORDER BY r.rating DESC
          """
