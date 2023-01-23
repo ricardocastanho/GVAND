@@ -83,6 +83,7 @@ export default {
       query: UserRecommendedMovies,
       loadingKey: 'isLoadingRecommended',
       update: ({ movies }) => movies,
+      fetchPolicy: 'cache-and-network',
       variables() {
         return {
           userId: this.userLoggedIn.userId,

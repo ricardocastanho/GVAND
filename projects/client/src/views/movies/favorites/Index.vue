@@ -72,6 +72,7 @@ export default {
     movies: {
       query: UserRatedMovies,
       loadingKey: 'isLoading',
+      fetchPolicy: 'cache-and-network',
       skip() {
         return !this.userLoggedIn.userId
       },
